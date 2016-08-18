@@ -9,10 +9,6 @@ var bodyParser = require('body-parser');
 
 var app = express();
 
-// Declare root path
-var path = require('path');
-global.appRoot = path.resolve(__dirname);
-
 // view engine setup
 app.set('views', path.join(__dirname, 'app', 'views'));
 app.set('view engine', 'ejs');
