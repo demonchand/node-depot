@@ -4,6 +4,7 @@ module.exports = {
 	},
 
 	show: function(req, res) {
-		res.render("products/show", {title: "Heloo"});
+		// res.render("products/show", {title: "Heloo", layout: 'layout'});
+		res.render("products/show", {title: "Heloo", layout: 'layouts/layout.ejs'});
 	}
 };
