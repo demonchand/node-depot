@@ -5,8 +5,23 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var expressLayouts = require('express-ejs-layouts');
+var MongoClient = require('mongodb').MongoClient;
 
-// var routes = require('./config/routes');
+// require("config/database.js")
+
+
+// Connect to the db
+var _db;
+MongoClient.connect("mongodb://localhost:27017/depot_development", function(err, db) {
+  if(!err) {
+    console.log("We are connected");
+    console.log(db)
+    _db = db;
+  }
+});
+
+console.log("next to connection");
+console.log(_db);
 
 var app = express();
 
@@ -28,6 +43,14 @@ app.use(expressLayouts);
 // app.use('/', routes);
 
 require('./config/routes')(app);
+
+app.get("/nothing", function(req, res) {
+  console.log("nothing");
+  console.log(_db)
+  var products = _db.collection('products');
+  products.insert({name: "Rails Intro", description: "Rails depot step by step", price: 12.99})
+  res.send("selll");
+})
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
