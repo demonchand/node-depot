@@ -1,5 +1,4 @@
 module.exports = function(app) {
-
 	var product = require("../app/controllers/products_controller")
 
 	app.get('/', function(req, res, next) {

@@ -6,6 +6,11 @@
   </head>
   <body>
     <h1><%= title %></h1>
-    <p><%= title %></p>
+    <%= products[0] %>
+    <% for(var i=0; i<products.length; i++) { %>
+    	<p>name: <%= products[i].name %></p>
+    	<p>description: <%= products[i].description %></p>
+    	<p>Price: <%= products[i].price %></p>
+    <% } %>	
   </body>
 </html>
