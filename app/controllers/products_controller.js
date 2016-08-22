@@ -1,4 +1,6 @@
-db = require("../../config/database.js");
+var db = require("../../config/database.js");
+var ObjectId = require('mongodb').ObjectID;
+
 module.exports = {
 	index: function(req, res) {
 	  db.get().collection("products").find({}).toArray(function(err, products) {
@@ -11,14 +13,13 @@ module.exports = {
 	},
 
 	show: function(req, res) {
-		// db = require("../../config/database.js").get();
-		// console.log("show action");
-		// console.log(db);
-		// db.get().collection('comments')
-	  var products = db.get().collection('products');
-	  products.insert({name: "Node depot", description: "Somee Rails depot step by step", price: 99.99})
-		// res.render("products/show", {title: "Heloo", layout: 'layout'});
-		res.render("products/show", {title: "Heloo", layout: 'layouts/layout.ejs'});
+	  db.get().collection("products").findOne({"_id": ObjectId(req.params.id)}, function(err, product) {
+	    if (err) {
+	      handleError(res, err.message, "Failed to get products.");
+	    } else {
+				res.render("products/show", {title: "Products Show", layout: 'layouts/layout.ejs', product: product});
+	    }
+	  });
 	},
 
 	create: function(req, res) {
