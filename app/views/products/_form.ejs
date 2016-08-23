@@ -1,0 +1,18 @@
+<form action="<%= action %>" method="<%= method %>">
+  <div class="some">
+	  <span>Name: </span><input type="text" name="name" value="<%= if product.name != 'undefined' product.name %>" />
+  </div>
+	<br/>
+
+  <div class="some">
+	  <span>Description: </span><textarea name="description"></textarea>
+  </div>
+	<br/>
+
+  <div class="some">
+	  <span>Price: </span><input type="text" name="price" />
+  </div>
+	<br/>
+
+	<input type="submit" value="Submit">
+</form>
