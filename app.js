@@ -7,6 +7,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var expressLayouts = require('express-ejs-layouts');
 var MongoClient = require('mongodb').MongoClient;
+var methodOverride = require('method-override')
 
 // Connect to the db
 // db = MongoClient.connect("mongodb://localhost:27017/depot_development", function(err, db) {
@@ -35,6 +36,16 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(expressLayouts);
+// app.use(methodOverride('_method'))
+app.use(methodOverride(function(req, res){
+  if (req.body && typeof req.body === 'object' && '_method' in req.body) {
+    // look in urlencoded POST bodies and delete it
+    var method = req.body._method
+    delete req.body._method
+    return method
+  }
+}));
+
 
 require('./config/routes')(app);
 
