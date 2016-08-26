@@ -1,4 +1,5 @@
 var db = require("../../config/database.js");
+var Product = require("../models/product.js");
 var ObjectId = require('mongodb').ObjectID;
 
 module.exports = {
@@ -56,6 +57,18 @@ module.exports = {
 	      handleError(res, err.message, "Failed to create product.");
 	    } else {
 				res.render("products/show", { title: "Products Show", layout: 'layouts/layout.ejs', product: data.ops[0] });
+	    }
+	  });
+	},
+
+	update: function(req, res) {
+		param = { name: req.body.name, description: req.body.description, price: req.body.price };
+	  db.get().collection("products").update({"_id": ObjectId(req.params.id)}, {$set: param}, function(err, data) {
+	    if (err) {
+	      handleError(res, err.message, "Failed to create product.");
+	    } else {
+	    	var product = db.get().collection("products").findOne({"_id": ObjectId(req.params.id)})
+				res.render("products/show", { title: "Products Show", layout: 'layouts/layout.ejs', product: product });
 	    }
 	  });
 	},

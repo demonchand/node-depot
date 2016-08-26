@@ -1,16 +1,19 @@
-<form action="<%= action %>" method="<%= method %>">
+<form action="<%= action %>" method="post">
+  <%// if(method == 'put') {%>
+    <input type="hidden" name="_method" value="PUT">
+  <%// } %>
   <div class="some">
-	  <span>Name: </span><input type="text" name="name" value="<%= if product.name != 'undefined' product.name %>" />
+	  <span>Name: </span><input type="text" name="name" value="<%= (product.name != 'undefined') ? product.name : '' %>" />
   </div>
 	<br/>
 
   <div class="some">
-	  <span>Description: </span><textarea name="description"></textarea>
+	  <span>Description: </span><textarea name="description"><%= (product.description != 'undefined') ? product.description : '' %></textarea>
   </div>
 	<br/>
 
   <div class="some">
-	  <span>Price: </span><input type="text" name="price" />
+	  <span>Price: </span><input type="text" name="price" value="<%= (product.price != 'undefined') ? product.price : '' %>" />
   </div>
 	<br/>
 
