@@ -67,15 +67,21 @@ module.exports = {
 	    if (err) {
 	      handleError(res, err.message, "Failed to create product.");
 	    } else {
-	    	var product = db.get().collection("products").findOne({"_id": ObjectId(req.params.id)})
-				res.render("products/show", { title: "Products Show", layout: 'layouts/layout.ejs', product: product });
+	    	db.get().collection("products").findOne({"_id": ObjectId(req.params.id)}, function(err, data) {
+	    		console.log(`from data update get recored collection ${data}`);
+					res.render("products/show", { title: "Products Show", layout: 'layouts/layout.ejs', product: data });
+    	});
 	    }
 	  });
 	},
 
-	destroy: function(res, res) {
-		console.log("Delete requrest triggered");
-		console.log(params)
-		res.redirect("/products");
+	destroy: function(req, res) {
+	  db.get().collection("products").remove({"_id": ObjectId(req.params.id)}, function(err) {
+	    if (err) {
+	      handleError(res, err.message, "Failed to create product.");
+	    }
+	  });
+
+		res.send(true);
 	}
 };

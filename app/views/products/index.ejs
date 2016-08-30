@@ -17,7 +17,7 @@
 		  	<td>
 					<a href="/products/<%= products[i]._id %>">Show</a>
 					<a href="/products/<%= products[i]._id %>/edit">Edit</a>
-					<a data-confirm="Are you sure?" data-method="delete" href="/products/<%= products[i]._id %>">Delete</a>
+					<a data-confirm="Are you sure?" data-method="delete" class="delete-link" href="/products/<%= products[i]._id %>">Delete</a>
 				</td>
 	  	</tr>
 	  <% } %>	
