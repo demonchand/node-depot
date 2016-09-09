@@ -1,8 +1,5 @@
 $(document).ready(function(){
   
-  console.log("loaded");
-  console.log($(".delete-link").length);
-
   $(".delete-link").on('click', function(e) {
       self=$(this);
       e.preventDefault();
@@ -20,9 +17,7 @@ $(document).ready(function(){
           }
         });
       };
-  })
-
-
+  });
 
 });
 
